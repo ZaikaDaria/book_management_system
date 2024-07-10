@@ -82,7 +82,7 @@ async def update_book_form(book_id: int, request: Request, db: Session = Depends
 
 @app.post("/books/{book_id}/update", response_model=schemas.Book, response_class=HTMLResponse)
 async def update_book(book_id: int, request: Request, title: str = Form(...), author: str = Form(...),
-                      publication_date: str = Form(...), isbn: str = Form(...), pages: int = Form(...),
+                      publication_date: date = Form(...), isbn: str = Form(...), pages: int = Form(...),
                       db: Session = Depends(get_db)):
     updated_book = schemas.BookUpdate(
         title=title,

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a Book</title>
+</head>
+<body>
+<h1>Create a New Book</h1>
+<form method="post" action="/books/create">
+    <label for="title">Title:</label><br>
+    <input type="text" id="title" name="title" required><br>
+
+    <label for="author">Author:</label><br>
+    <input type="text" id="author" name="author" required><br>
+
+    <label for="publication_date">Publication Date:</label><br>
+    <input type="date" id="publication_date" name="publication_date" required><br>
+
+    <label for="isbn">ISBN:</label><br>
+    <input type="text" id="isbn" name="isbn" required><br>
+
+    <label for="pages">Pages:</label><br>
+    <input type="number" id="pages" name="pages" required><br>
+
+    <button type="submit">Create Book</button>
+</form>
+</body>
+</html>

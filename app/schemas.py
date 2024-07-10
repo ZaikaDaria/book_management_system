@@ -15,7 +15,7 @@ class BookCreate(BookBase):
     pass
 
 
-class BookGet(BookBase):
+class Book(BookBase):
     id: int
     title: str
     author: str
@@ -29,7 +29,7 @@ class BookGet(BookBase):
 
 class PaginatedResponse(BaseModel):
     total: int
-    items: List[BookGet]
+    items: List[Book]
 
 
 class BookUpdate(BookBase):

@@ -9,5 +9,5 @@ class DBBook(Base):
     title = Column(String, index=True)
     author = Column(String, index=True)
     publication_date = Column(Date, index=True)
-    isbn = Column(String, index=True)
+    isbn = Column(String(13), index=True)
     pages = Column(Integer, index=True)

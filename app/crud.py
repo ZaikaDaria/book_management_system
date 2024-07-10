@@ -1,14 +1,13 @@
 from sqlalchemy.orm import Session
 from typing import List, Optional
 
-from .schemas import BookCreate
+from .schemas import BookCreate, BookUpdate
 from .models import DBBook
 
 
 def get_all_books(
     db: Session,
 ) -> List[DBBook]:
-
     return db.query(DBBook).all()
 
 
@@ -27,4 +26,14 @@ def create_book(db: Session, book: BookCreate) -> DBBook:
     db.add(db_book)
     db.commit()
     db.refresh(db_book)
+    return db_book
+
+
+def update_book(db: Session, book_id: int, book: BookUpdate) -> DBBook:
+    db_book = db.query(DBBook).filter(DBBook.id == book_id).first()
+    if db_book:
+        for key, value in book.dict(exclude_unset=True).items():
+            setattr(db_book, key, value)
+        db.commit()
+        db.refresh(db_book)
     return db_book

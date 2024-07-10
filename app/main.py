@@ -1,6 +1,6 @@
 from datetime import date
 from fastapi import FastAPI, Request, Depends, Form, HTTPException
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 
@@ -67,3 +67,32 @@ async def read_book(book_id: int, request: Request, db: Session = Depends(get_db
     if book is None:
         raise HTTPException(status_code=404, detail="Book not found")
     return templates.TemplateResponse("book_detail.html", {"request": request, "book": book})
+
+
+@app.get("/books/{book_id}/update", response_class=HTMLResponse)
+async def update_book_form(book_id: int, request: Request, db: Session = Depends(get_db)):
+    book = crud.get_book(db=db, book_id=book_id)
+    if book is None:
+        raise HTTPException(status_code=404, detail="Book not found")
+    return templates.TemplateResponse("update_book_form.html", {"request": request, "book": book})
+
+
+@app.post("/books/{book_id}/update", response_class=HTMLResponse)
+async def update_book(
+    book_id: int,
+    title: str = Form(...),
+    author: str = Form(...),
+    publication_date: date = Form(...),
+    isbn: str = Form(...),
+    pages: int = Form(...),
+    db: Session = Depends(get_db)
+) -> schemas.Book:
+    book_update = schemas.BookUpdate(
+        title=title,
+        author=author,
+        publication_date=publication_date,
+        isbn=isbn,
+        pages=pages
+    )
+    updated_book = crud.update_book(db=db, book_id=book_id, book=book_update)
+    return RedirectResponse(url=f"/books/{updated_book.id}", status_code=303)

@@ -32,12 +32,15 @@ class PaginatedResponse(BaseModel):
     items: List[Book]
 
 
-class BookUpdate(BookBase):
+class BookUpdate(BaseModel):
     title: Optional[str] = None
     author: Optional[str] = None
     publication_date: Optional[date] = None
     isbn: Optional[str] = None
     pages: Optional[int] = None
+
+    class Config:
+        orm_mode = True
 
 
 class BookOut(BookBase):

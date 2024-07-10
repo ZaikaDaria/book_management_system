@@ -39,8 +39,10 @@ def update_book(db: Session, book_id: int, book: BookUpdate) -> DBBook:
     return db_book
 
 
-def delete_book(db: Session, book_id: int) -> None:
+def delete_book(db: Session, book_id: int) -> Optional[DBBook]:
     book = db.query(DBBook).filter(DBBook.id == book_id).first()
     if book:
         db.delete(book)
         db.commit()
+        return book
+    return None

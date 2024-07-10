@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}Book Deleted{% endblock %}
+
+{% block content %}
+<h1>Book Deleted</h1>
+<p>The book "{{ book.title }}" has been successfully deleted.</p>
+<a href="/books/">Back to Books List</a>
+{% endblock %}

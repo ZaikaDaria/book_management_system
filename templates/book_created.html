@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>created</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block title %}Book Created{% endblock %}
+
+{% block content %}
+<h1>Book Created</h1>
+<p>Your book has been successfully created.</p>
+<a href="/books/">Back to Books List</a>
+{% endblock %}

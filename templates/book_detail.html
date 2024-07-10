@@ -1,23 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Details</title>
-</head>
-<body>
-    <h1>{{ book.title }}</h1>
-    <p>Author: {{ book.author }}</p>
-    <p>Publication Date: {{ book.publication_date }}</p>
-    <p>ISBN: {{ book.isbn }}</p>
-    <p>Pages: {{ book.pages }}</p>
+{% extends "base.html" %}
 
-    <form method="post" action="/books/{{ book.id }}/delete">
-        <button type="submit">Delete Book</button>
-    </form>
+{% block title %}{{ book.title }}{% endblock %}
 
-    <a href="/books/{{ book.id }}/update">Update Book</a>
-    <br>
-    <a href="/books/">Back to Books List</a>
-</body>
-</html>
+{% block content %}
+<h1>{{ book.title }}</h1>
+<p><strong>Author:</strong> {{ book.author }}</p>
+<p><strong>Publication Date:</strong> {{ book.publication_date }}</p>
+<p><strong>ISBN:</strong> {{ book.isbn }}</p>
+<p><strong>Pages:</strong> {{ book.pages }}</p>
+<form action="/books/{{ book.id }}/update" method="post">
+    <button type="submit">Update</button>
+</form>
+<form action="/books/{{ book.id }}/delete" method="post">
+    <button type="submit">Delete</button>
+</form>
+{% endblock %}

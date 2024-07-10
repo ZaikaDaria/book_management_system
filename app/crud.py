@@ -7,10 +7,9 @@ from .models import DBBook
 
 def get_all_books(
     db: Session,
-    skip: int = 0, limit: int = 2
 ) -> List[DBBook]:
-    queryset = db.query(DBBook)
-    return queryset.offset(skip).limit(limit).all()
+
+    return db.query(DBBook).all()
 
 
 def get_book(db: Session, book_id: int) -> Optional[DBBook]:

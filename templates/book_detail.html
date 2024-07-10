@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}{{ book.title }}{% endblock %}
+
+{% block content %}
+<h1>{{ book.title }}</h1>
+<p><strong>Author:</strong> {{ book.author }}</p>
+<p><strong>Publication Date:</strong> {{ book.publication_date }}</p>
+<p><strong>ISBN:</strong> {{ book.isbn }}</p>
+<p><strong>Pages:</strong> {{ book.pages }}</p>
+<form action="/books/{{ book.id }}/update" method="post">
+    <button type="submit">Update</button>
+</form>
+<form action="/books/{{ book.id }}/delete" method="post">
+    <button type="submit">Delete</button>
+</form>
+{% endblock %}

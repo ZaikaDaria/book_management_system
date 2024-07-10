@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Update Book: {{ book.title }}{% endblock %}
+
+{% block content %}
+<h1>Update Book</h1>
+<form method="post" action="/books/{{ book.id }}/update">
+    <label for="title">Title:</label><br>
+    <input type="text" id="title" name="title" value="{{ book.title }}" required><br>
+
+    <label for="author">Author:</label><br>
+    <input type="text" id="author" name="author" value="{{ book.author }}" required><br>
+
+    <label for="publication_date">Publication Date:</label><br>
+    <input type="date" id="publication_date" name="publication_date" value="{{ book.publication_date }}" required><br>
+
+    <label for="isbn">ISBN:</label><br>
+    <input type="text" id="isbn" name="isbn" value="{{ book.isbn }}" required><br>
+
+    <label for="pages">Pages:</label><br>
+    <input type="number" id="pages" name="pages" value="{{ book.pages }}" required><br>
+
+    <button type="submit">Update Book</button>
+</form>
+{% endblock %}

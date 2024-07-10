@@ -1,5 +1,5 @@
 from datetime import date
-from fastapi import FastAPI, Request, Depends, Form, HTTPException
+from fastapi import FastAPI, Request, Depends, Form, HTTPException, status
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
@@ -29,7 +29,7 @@ async def db_session_middleware(request: Request, call_next):
     return response
 
 
-@app.get("/books/", response_class=HTMLResponse)
+@app.get("/", response_class=HTMLResponse)
 async def read_books(request: Request, db: Session = Depends(get_db)):
     books = crud.get_all_books(db=db)
     return templates.TemplateResponse("books.html", {"request": request, "books": books})
@@ -96,3 +96,9 @@ async def update_book(
     )
     updated_book = crud.update_book(db=db, book_id=book_id, book=book_update)
     return RedirectResponse(url=f"/books/{updated_book.id}", status_code=303)
+
+
+@app.post("/books/{book_id}/delete", response_class=HTMLResponse)
+async def delete_book(book_id: int, db: Session = Depends(get_db)) -> RedirectResponse:
+    crud.delete_book(db=db, book_id=book_id)
+    return RedirectResponse(url="/", status_code=status.HTTP_303_SEE_OTHER)

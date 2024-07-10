@@ -37,3 +37,10 @@ def update_book(db: Session, book_id: int, book: BookUpdate) -> DBBook:
         db.commit()
         db.refresh(db_book)
     return db_book
+
+
+def delete_book(db: Session, book_id: int) -> None:
+    book = db.query(DBBook).filter(DBBook.id == book_id).first()
+    if book:
+        db.delete(book)
+        db.commit()

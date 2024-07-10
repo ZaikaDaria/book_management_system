@@ -2,15 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ book.title }}</title>
+    <title>Book Details</title>
 </head>
 <body>
-    <p>Title: {{ book.title }}</p>
+    <h1>{{ book.title }}</h1>
     <p>Author: {{ book.author }}</p>
     <p>Publication Date: {{ book.publication_date }}</p>
     <p>ISBN: {{ book.isbn }}</p>
     <p>Pages: {{ book.pages }}</p>
+
+    <form method="post" action="/books/{{ book.id }}/delete">
+        <button type="submit">Delete Book</button>
+    </form>
+
+    <a href="/books/{{ book.id }}/update">Update Book</a>
+    <br>
+    <a href="/books/">Back to Books List</a>
 </body>
 </html>
